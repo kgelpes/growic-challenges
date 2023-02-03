@@ -12,12 +12,8 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Edit env
-        uses: vafinvr/template-env-action@v2.0.1
-        env:
-          FOO: foo
-          BAR: bar
-        with:
-          filename: .env
+        run: |
+          touch .env-new
       - name: Commit and push changes
         run: |
           git config --global user.name "your username"
