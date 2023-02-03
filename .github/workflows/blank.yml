@@ -1,0 +1,30 @@
+name: Create branch with new env
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Edit env
+        uses: vafinvr/template-env-action@v2.0.1
+        env:
+          FOO: foo
+          BAR: bar
+        with:
+          filename: /.env
+      - name: commit-push_branch-test
+        uses: dsayling/commit-branch-check-action@v0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Update from ${{github.event.pull_request.head.ref}}"
+          dest-branch: ${{github.event.pull_request.head.sha }}-new
+          verify-checks: false
+          delete-after-checks: false
+          
+      
