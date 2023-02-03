@@ -14,6 +14,7 @@ jobs:
       - name: Edit env
         run: |
           touch .env-new
+          echo "FOO=BAR" >> .env-new
       - name: Commit and push changes
         run: |
           git config --global user.name "your username"
@@ -22,5 +23,5 @@ jobs:
           git add -A
           git checkout -b new-branch
           git commit -m "commit message"
-          git push
+          git push --set-upstream origin new-branch
       
