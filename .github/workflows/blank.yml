@@ -18,10 +18,13 @@ jobs:
           BAR: bar
         with:
           filename: .env
-      - name: commit-push_branch-test
-        uses: dsayling/commit-branch-check-action@v0.1.5
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Update from ${{github.event.pull_request.head.ref}}"
-          dest-branch: ${{github.event.pull_request.head.sha }}-new
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "your username"
+          git config --global user.email "your email"
+
+          git add -A
+          git checkout -b new-branch
+          git commit -m "commit message"
+          git push
       
