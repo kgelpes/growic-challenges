@@ -17,7 +17,7 @@ jobs:
           FOO: foo
           BAR: bar
         with:
-          filename: /.env
+          filename: .env
       - name: commit-push_branch-test
         uses: dsayling/commit-branch-check-action@v0.1.5
         with:
